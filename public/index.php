@@ -1,39 +1,12 @@
 <?php
 session_start();
-include '../includes/auth.php';
-
 if (isset($_SESSION['username'])) {
     header('Location: dashboard.php');
     exit();
 }
 
-$error = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if ($username === '' || $password === '') {
-        $error = 'Please enter username and password';
-    }
-    else {
-        if (authenticate($username, $password)) {
-            $_SESSION['username'] = $username;
-            header('Location: dashboard.php');
-            exit();
-        }
-
-        $error = "Invalid username or password.";
-    }
-
-    echo '<script>
-        window.onload = function() {
-            document.getElementById("username").focus();
-        };
-    </script>';
-}
+$error = isset($_GET['error']) ? $_GET['error'] : '';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <?php include '../includes/header.php'; ?>
@@ -41,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="login flex-center">
         <h1>Login</h1>
-        <form method="POST" action="index.php" class="flex-center">
+        <form method="POST" action="login.php" class="flex-center">
             <label>Username:</label>
             <label>
                 <input type="text" name="username" id="username" required class="login-input">
@@ -53,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </label>
 
             <?php if ($error): ?>
-                <p id="error"><?php echo $error; ?></p>
+                <p id="error"><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
 
             <input type="submit" value="Login" id="submit">
@@ -61,5 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 <?php include '../includes/footer.php'; ?>
+<script>
+    window.onload = function() {
+        document.getElementById("username").focus();
+    };
+</script>
 </body>
 </html>
