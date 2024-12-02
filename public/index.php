@@ -13,13 +13,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (authenticate($username, $password)) {
-        $_SESSION['username'] = $username;
-        header('Location: dashboard.php');
-        exit();
+    if ($username === '' || $password === '') {
+        $error = 'Please enter username and password';
+    }
+    else {
+        if (authenticate($username, $password)) {
+            $_SESSION['username'] = $username;
+            header('Location: dashboard.php');
+            exit();
+        }
+
+        $error = "Invalid username or password.";
     }
 
-    $error = "Invalid username or password.";
+    echo '<script>
+        window.onload = function() {
+            document.getElementById("username").focus();
+        };
+    </script>';
 }
 ?>
 
@@ -37,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="POST" action="index.php" class="flex-center">
             <label>Username:</label>
             <label>
-                <input type="text" name="username" required class="login-input">
+                <input type="text" name="username" id="username" required class="login-input">
             </label>
 
             <label>Password:</label>
