@@ -70,6 +70,8 @@ footer {
     padding: 10px;
     background-color: #525B44;
     color: #D3F1DF;
+    position: fixed;
+    bottom: 0;
 }
 
 nav {

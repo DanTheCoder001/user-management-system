@@ -4,10 +4,7 @@
 <body>
 <?php include '../includes/nav.php'; ?>
 <main class="flex-center">
-    <!-- Apply flex-center to the form for centering -->
-    <form method="POST" action="dashboard.php" class="flex-center">
-        <input type="submit" value="Logout" id="submit">
-    </form>
+    <h1>This will be the main dashboard!!!</h1>
 </main>
 <?php include '../includes/footer.php'; ?>
 </body>
