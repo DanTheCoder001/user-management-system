@@ -41,10 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="login flex-center">
         <h1>Login</h1>
-        <?php if ($error): ?>
-            <p id="error"><?php echo $error; ?></p>
-        <?php endif; ?>
-
         <form method="POST" action="index.php" class="flex-center">
             <label>Username:</label>
             <label>
@@ -55,6 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>
                 <input type="password" name="password" required class="login-input">
             </label>
+
+            <?php if ($error): ?>
+                <p id="error"><?php echo $error; ?></p>
+            <?php endif; ?>
 
             <input type="submit" value="Login" id="submit">
         </form>
