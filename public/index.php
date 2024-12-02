@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['email'])) {
     header('Location: dashboard.php');
     exit();
 }
@@ -15,9 +15,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
     <div class="login flex-center">
         <h1>Login</h1>
         <form method="POST" action="login.php" class="flex-center">
-            <label>Username:</label>
+            <label>Email:</label>
             <label>
-                <input type="text" name="username" id="username" required class="login-input">
+                <input type="email" name="email" id="email" required class="login-input">
             </label>
 
             <label>Password:</label>
@@ -34,10 +34,5 @@ $error = isset($_GET['error']) ? $_GET['error'] : '';
     </div>
 </main>
 <?php include '../includes/footer.php'; ?>
-<script>
-    window.onload = function() {
-        document.getElementById("username").focus();
-    };
-</script>
 </body>
 </html>

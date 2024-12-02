@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../includes/authentication.php';
+include '../includes/auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     logout();

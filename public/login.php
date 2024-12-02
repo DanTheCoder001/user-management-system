@@ -1,22 +1,26 @@
 <?php
 session_start();
-include '../includes/authentication.php';
+include '../includes/auth.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    if ($username === '' || $password === '') {
-        header('Location: index.php?error=' . urlencode('Please enter username and password.'));
+    if ($email === '' || $password === '') {
+        header('Location: index.php?error=' . urlencode('Please enter email and password.'));
         exit();
     }
 
-    if (authenticate($username, $password)) {
-        $_SESSION['username'] = $username;
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header('Location: index.php?error=' . urlencode('Invalid email format.'));
+        exit();
+    }
+    
+    if (authenticate($email, $password)) {
         header('Location: dashboard.php');
         exit();
     } else {
-        header('Location: index.php?error=' . urlencode('Invalid username or password.'));
+        header('Location: index.php?error=' . urlencode('Invalid email or password.'));
         exit();
     }
 } else {
