@@ -6,17 +6,19 @@ body {
     background-color: #525B44;
 }
 
-.login {
+.flex-center {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.login {
+    flex-direction: column;
     min-height: 100vh;
 }
 
 h1 {
-    text-align: center;
     font-size: 4rem;
     color: #D3F1DF;
 }
@@ -24,9 +26,8 @@ h1 {
 form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    text-align: center;
+    width: 100%;
 }
 
 label {
@@ -39,11 +40,6 @@ input {
 }
 
 .login-input {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     width: 100%;
     font-size: 1.5rem;
     border-radius: 10px;
@@ -56,6 +52,7 @@ input {
     border: none;
     background-color: #5A6C57;
     color: #D3F1DF;
+    cursor: pointer;
 }
 
 #submit:hover {
@@ -68,13 +65,35 @@ input {
 }
 
 footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 100%;
+    padding: 10px;
     background-color: #525B44;
     color: #D3F1DF;
-    padding: 10px;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #ff9800;
 }

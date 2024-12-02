@@ -1,9 +1,18 @@
-<nav>
-    <ul>
-        <li>Test 1</li>
-        <li>Test 2</li>
-        <li>Test 3</li>
-        <li>Test 4</li>
-        <li>Test 5</li>
+<?php
+session_start();
+include '../includes/auth.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    logout();
+}
+?>
+
+<nav class="flex-center">
+    <ul class="flex-center">
+        <li>
+            <form action="../includes/nav.php" method="POST" class="flex-center">
+                <button type="submit">Logout</button>
+            </form>
+        </li>
     </ul>
 </nav>

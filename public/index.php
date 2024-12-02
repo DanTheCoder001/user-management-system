@@ -26,29 +26,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <?php include '../includes/header.php'; ?>
-    <body>
-        <main>
-            <div class="login">
-                <h1>Login</h1>
-                <?php if ($error): ?>
-                    <p id="error"><?php echo $error; ?></p>
-                <?php endif; ?>
+<body>
+<main>
+    <div class="login flex-center">
+        <h1>Login</h1>
+        <?php if ($error): ?>
+            <p id="error"><?php echo $error; ?></p>
+        <?php endif; ?>
 
-                <form method="POST" action="index.php">
-                    <label>Username:</label>
-                    <label>
-                        <input type="text" name="username" required class="login-input">
-                    </label>
+        <form method="POST" action="index.php" class="flex-center">
+            <label>Username:</label>
+            <label>
+                <input type="text" name="username" required class="login-input">
+            </label>
 
-                    <label>Password:</label>
-                    <label>
-                        <input type="password" name="password" required class="login-input">
-                    </label>
+            <label>Password:</label>
+            <label>
+                <input type="password" name="password" required class="login-input">
+            </label>
 
-                    <input type="submit" value="Login" id="submit">
-                </form>
-            </div>
-        </main>
-        <?php include '../includes/footer.php'; ?>
-    </body>
+            <input type="submit" value="Login" id="submit">
+        </form>
+    </div>
+</main>
+<?php include '../includes/footer.php'; ?>
+</body>
 </html>
