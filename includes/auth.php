@@ -1,7 +1,7 @@
 <?php
 include 'db.php';
 
-function authenticate($email, $password)
+function authenticate($email, $password): bool
 {
     global $mysqli;
     
@@ -25,7 +25,7 @@ function authenticate($email, $password)
     return false;
 }
 
-function logout()
+function logout(): void
 {
     session_destroy();
     header('Location: ../public/index.php');

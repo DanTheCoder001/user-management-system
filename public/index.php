@@ -5,7 +5,7 @@ if (isset($_SESSION['email'])) {
     exit();
 }
 
-$error = isset($_GET['error']) ? $_GET['error'] : '';
+$error = $_GET['error'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">

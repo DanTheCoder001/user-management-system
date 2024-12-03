@@ -16,23 +16,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: new-user.php?error=' . urlencode('Invalid email format.'));
         exit();
     }
-    
+
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     global $mysqli;
-    
-    $stmt = $mysqli->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
-    
-    $stmt->bind_param("ss", $email, $hashed_password);
-    
-    if ($stmt->execute()) {
+
+    try {
+        $stmt = $mysqli->prepare("INSERT INTO users (email, password) VALUES (?, ?)");
+        $stmt->bind_param("ss", $email, $hashed_password);
+        $stmt->execute();
+
         header("Location: dash-board.php");
-        exit;
+        exit();
+    } catch (mysqli_sql_exception $e) {
+        // Check for duplicate entry error code
+        if ($e->getCode() === 1062) {
+            header('Location: new-user.php?error=' . urlencode('Email already exists.'));
+        } else {
+            header('Location: new-user.php?error=' . urlencode('An unexpected error occurred. Please try again.'));
+        }
+    } finally {
+        if (isset($stmt)) {
+            $stmt->close();
+        }
     }
-
-    echo "Error: " . $stmt->error;
-
-    $stmt->close();
 }
 ?>
 
@@ -45,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>New User Screen</h1>
     <form method="POST" action="new-user.php">
         <label>
-            <input type="text" name="email" required>
+            <input type="email" name="email" required>
         </label>
         <label>
             <input type="password" name="password" required>

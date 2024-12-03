@@ -1,6 +1,7 @@
 <?php
 include 'db.php';
-function user_list() {
+function user_list(): array
+{
     global $mysqli;
 
     $stmt = $mysqli->prepare("SELECT id, email FROM users");
@@ -15,4 +16,3 @@ function user_list() {
     $stmt->close();
     return $users;
 }
-?>
