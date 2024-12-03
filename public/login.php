@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if (authenticate($email, $password)) {
-        header('Location: dashboard.php');
+        header('Location: dash-board.php');
         exit();
     } else {
         header('Location: index.php?error=' . urlencode('Invalid email or password.'));

@@ -21,6 +21,7 @@ body {
 h1 {
     font-size: 4rem;
     color: #D3F1DF;
+    text-align: center;
 }
 
 form {
@@ -111,5 +112,8 @@ table {
 table td, th {
     text-align: center;
     border: 1px solid black;
-    
+}
+
+.container {
+    margin: 10px;
 }
