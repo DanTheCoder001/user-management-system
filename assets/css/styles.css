@@ -36,7 +36,7 @@ label {
 }
 
 input {
-    margin: 5px 0;
+    margin: 5px 0; 
 }
 
 .login-input {
@@ -100,4 +100,16 @@ nav ul li a {
 
 nav ul li a:hover {
     color: #ff9800;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+table td, th {
+    text-align: center;
+    border: 1px solid black;
+    
 }
