@@ -1,7 +1,7 @@
 <?php
 include_once '../includes/db.php';
 
-$error = isset($_GET['error']) ? $_GET['error'] : '';
+$error = $_GET['error'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
@@ -28,14 +28,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
         header("Location: dash-board.php");
         exit;
-    } else {
-        echo "Error: " . $stmt->error;
     }
-    
+
+    echo "Error: " . $stmt->error;
+
     $stmt->close();
 }
-
-$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -46,8 +44,12 @@ $mysqli->close();
 <main>
     <h1>New User Screen</h1>
     <form method="POST" action="new-user.php">
-        <input type="text" name="email" >
-        <input type="password" name="password" >
+        <label>
+            <input type="text" name="email" >
+        </label>
+        <label>
+            <input type="password" name="password" >
+        </label>
         <input type="submit">
     </form>
     <?php if ($error): ?>
