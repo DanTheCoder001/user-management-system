@@ -45,10 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>New User Screen</h1>
     <form method="POST" action="new-user.php">
         <label>
-            <input type="text" name="email" >
+            <input type="text" name="email" required>
         </label>
         <label>
-            <input type="password" name="password" >
+            <input type="password" name="password" required>
         </label>
         <input type="submit">
     </form>
