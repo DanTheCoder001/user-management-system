@@ -16,3 +16,18 @@ function user_list(): array
     $stmt->close();
     return $users;
 }
+
+function user_info(int $id): array {
+    global $mysqli;
+
+    $stmt = $mysqli->prepare("SELECT id, email FROM users WHERE id = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Fetch a single record
+    $user = $result->fetch_assoc();
+
+    $stmt->close();
+    return $user ?: []; // Return an empty array if no user is found
+}

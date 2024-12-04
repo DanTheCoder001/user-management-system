@@ -26,7 +26,9 @@ $users = user_list();
                     <tr>
                         <td><?php echo htmlspecialchars($user['id']); ?></td>
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        <td><input type="submit" value="Edit"></td>
+                        <td>
+                            <a href="edit-user.php?id=<?php echo urlencode($user['id']); ?>">Edit</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
