@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        placeholder="Email address" required>
 
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" placeholder="Enter a new password">
+                <input type="password" name="password" id="password" placeholder="Enter a new password" required>
 
                 <input type="submit" value="Update">
             </form>
