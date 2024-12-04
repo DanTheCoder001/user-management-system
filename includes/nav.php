@@ -1,9 +1,5 @@
 <?php
-function logout(): void
-{
-    session_destroy();
-    header('Location: ../public/index.php');
-}
+include_once '../includes/functions.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     logout();

@@ -1,19 +1,6 @@
 <?php
-    include '../includes/database.php';
-    
-    $users = [];
-    
-    global $mysqli;
-    
-    $stmt = $mysqli->prepare("SELECT id, email FROM users");
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    while ($row = $result->fetch_assoc()) {
-        $users[] = $row;
-    }
-    
-    $stmt->close();
+    include '../includes/functions.php';
+    $users = userList();
 ?>
 
 <!DOCTYPE html>
