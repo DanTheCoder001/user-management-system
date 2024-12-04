@@ -1,7 +1,19 @@
 <?php
-include '../includes/user-list.php';
-
-$users = user_list();
+    include '../includes/database.php';
+    
+    $users = [];
+    
+    global $mysqli;
+    
+    $stmt = $mysqli->prepare("SELECT id, email FROM users");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    while ($row = $result->fetch_assoc()) {
+        $users[] = $row;
+    }
+    
+    $stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +23,8 @@ $users = user_list();
 <?php include '../includes/nav.php'; ?>
 <main>
 <h1>Users</h1>
-    <div class="container">
-        <a href="new-user.php">New User</a>
+    <div>
+        <a href="newuser.php">New User</a>
         <table>
             <thead>
             <tr>
@@ -27,7 +39,7 @@ $users = user_list();
                         <td><?php echo htmlspecialchars($user['id']); ?></td>
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td>
-                            <a href="edit-user.php?id=<?php echo urlencode($user['id']); ?>">Edit</a>
+                            <a href="edituser.php?id=<?php echo urlencode($user['id']); ?>">Edit</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

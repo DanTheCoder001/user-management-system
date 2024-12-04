@@ -1,2 +1,2 @@
 currentYear = new Date().getFullYear();
-document.getElementById("currentYear").innerHTML = currentYear;
+document.getElementById("currentYear").innerHTML = String(currentYear);

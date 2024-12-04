@@ -1,6 +1,27 @@
 <?php
-session_start();
-include '../includes/auth.php';
+function authenticate($email, $password): bool
+{
+    global $mysqli;
+
+    $stmt = $mysqli->prepare("SELECT id, email, password FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($id, $stored_email, $stored_password);
+        $stmt->fetch();
+
+        if (password_verify($password, $stored_password)) {
+            session_start();
+            $_SESSION['user_id'] = $id;
+            $_SESSION['email'] = $stored_email;
+            return true;
+        }
+    }
+
+    return false;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
@@ -17,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if (authenticate($email, $password)) {
-        header('Location: dash-board.php');
+        header('Location: dashboard.php');
         exit();
     }
 

@@ -1,16 +1,19 @@
 <?php
-session_start();
-include '../includes/auth.php';
+function logout(): void
+{
+    session_destroy();
+    header('Location: ../public/index.php');
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     logout();
 }
 ?>
 
-<nav class="flex-center">
-    <ul class="flex-center">
+<nav>
+    <ul>
         <li>
-            <form action="../includes/nav.php" method="POST" class="flex-center">
+            <form action="nav.php" method="POST">
                 <button type="submit">Logout</button>
             </form>
         </li>

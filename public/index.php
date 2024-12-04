@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION['email'])) {
-    header('Location: dash-board.php');
+    header('Location: dashboard.php');
     exit();
 }
 
@@ -14,7 +14,7 @@ $error = $_GET['error'] ?? '';
 <main>
     <div class="login flex-center">
         <h1>Login</h1>
-        <form method="POST" action="login.php" class="flex-center">
+        <form method="POST" action="../includes/login.php" class="flex-center">
             <label>Email:</label>
             <label>
                 <input type="email" name="email" id="email" required class="login-input">

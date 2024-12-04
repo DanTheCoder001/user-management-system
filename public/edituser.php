@@ -1,23 +1,31 @@
 <?php
-include_once '../includes/user-list.php';
-include_once '../includes/db.php';
+include_once '../includes/database.php';
 
 $id = $_GET['id'] ?? null;
-$user = $id ? user_info((int)$id) : null;
-
 $error = $_GET['error'] ?? '';
+
+global $mysqli;
+
+$stmt = $mysqli->prepare("SELECT id, email FROM users WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$user = $result->fetch_assoc();
+
+$stmt->close();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     if ($email === '' || $password === '') {
-        header('Location: edit-user.php?error=' . urlencode('Please enter email and password.'));
+        header('Location: edituser.php?error=' . urlencode('Please enter email and password.'));
         exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header('Location: edit-user.php?error=' . urlencode('Invalid email format.'));
+        header('Location: edituser.php?error=' . urlencode('Invalid email format.'));
         exit();
     }
 
@@ -39,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             throw new mysqli_sql_exception("No rows updated. User ID might not exist.");
         }
 
-        header("Location: dash-board.php");
+        header("Location: dashboard.php");
         exit();
     } catch (mysqli_sql_exception $e) {
         // Log the error for debugging (do not expose detailed errors to users in production).
@@ -64,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Edit User</h1>
     <div class="container">
         <?php if ($user): ?>
-            <form action="edit-user.php" method="post">
+            <form action="edituser.php" method="post">
                 <label for="email">Email:</label>
                 <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" id="email" 
                        placeholder="Email address" required>
