@@ -25,10 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: index.php?error=' . urlencode('Invalid email or password.'));
     exit();
 }
-
-header('Location: index.php');
-exit();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <?php include '../includes/header.php'; ?>

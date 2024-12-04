@@ -11,7 +11,7 @@
 <main>
 <h1>Users</h1>
     <div>
-        <a href="newuser.php">New User</a>
+        <a href="new-user.php">New User</a>
         <table>
             <thead>
             <tr>
@@ -26,7 +26,7 @@
                         <td><?php echo htmlspecialchars($user['id']); ?></td>
                         <td><?php echo htmlspecialchars($user['email']); ?></td>
                         <td>
-                            <a href="edituser.php?id=<?php echo urlencode($user['id']); ?>">Edit</a>
+                            <a href="edit-user.php?id=<?php echo urlencode($user['id']); ?>">Edit</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

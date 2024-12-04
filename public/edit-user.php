@@ -20,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     if ($email === '' || $password === '') {
-        header('Location: edituser.php?error=' . urlencode('Please enter email and password.'));
+        header('Location: edit-user.php?error=' . urlencode('Please enter email and password.'));
         exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header('Location: edituser.php?error=' . urlencode('Invalid email format.'));
+        header('Location: edit-user.php?error=' . urlencode('Invalid email format.'));
         exit();
     }
 
@@ -56,9 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Optionally, display a user-friendly error message.
         echo "There was a problem updating your information. Please try again later.";
     } finally {
-        if (isset($stmt)) {
-            $stmt->close();
-        }
+        $stmt?->close();
     }
 }
 ?>
@@ -72,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>Edit User</h1>
     <div class="container">
         <?php if ($user): ?>
-            <form action="edituser.php" method="post">
+            <form action="edit-user.php" method="post">
                 <label for="email">Email:</label>
                 <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" id="email" 
                        placeholder="Email address" required>

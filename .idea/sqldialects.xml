@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/includes/functions.php" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/public/edituser.php" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/public/newuser.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/edit-user.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/public/new-user.php" dialect="GenericSQL" />
   </component>
 </project>

@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     if ($email === '' || $password === '') {
-        header('Location: newuser.php?error=' . urlencode('Please enter email and password.'));
+        header('Location: new-user.php?error=' . urlencode('Please enter email and password.'));
         exit();
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header('Location: newuser.php?error=' . urlencode('Invalid email format.'));
+        header('Location: new-user.php?error=' . urlencode('Invalid email format.'));
         exit();
     }
 
@@ -31,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } catch (mysqli_sql_exception $e) {
         // Check for duplicate entry error code
         if ($e->getCode() === 1062) {
-            header('Location: newuser.php?error=' . urlencode('Email already exists.'));
+            header('Location: new-user.php?error=' . urlencode('Email already exists.'));
         } else {
-            header('Location: newuser.php?error=' . urlencode('An unexpected error occurred. Please try again.'));
+            header('Location: new-user.php?error=' . urlencode('An unexpected error occurred. Please try again.'));
         }
     } finally {
         if (isset($stmt)) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php include '../includes/nav.php'; ?>
 <main>
     <h1>New User Screen</h1>
-    <form method="POST" action="newuser.php">
+    <form method="POST" action="new-user.php">
         <label>
             <input type="email" name="email" required>
         </label>
